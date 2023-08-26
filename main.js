@@ -1,5 +1,13 @@
+const { createApp } = require('./src/app');
+
 const main = () => {
-  console.log('hello world');
+  const port = 8000;
+  const app = createApp();
+
+  app.listen(port, () => {
+    console.log('Listening on port: ', port);
+    console.log(new Date().toGMTString());
+  });
 };
 
 main();
