@@ -1,0 +1,7 @@
+.eslintrc.js
+*.css
+*.html
+*.md
+*.sh
+.gitignore
+node_modules
