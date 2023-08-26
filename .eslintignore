@@ -3,5 +3,6 @@
 *.html
 *.md
 *.sh
+*.json
 .gitignore
 node_modules

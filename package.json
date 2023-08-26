@@ -7,7 +7,8 @@
     "test": "node --test",
     "lint": "npx eslint .",
     "start": "node main.js",
-    "setup": "./bin/setup.sh"
+    "setup": "./bin/setup.sh",
+    "coverage": "npx nyc node --test"
   },
   "keywords": [],
   "author": "",
