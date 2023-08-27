@@ -59,3 +59,10 @@ user.removeSong(song, playlist);
 - should songs be an entity?
   yes.
 
+# what happens when a playlist is added.
+
+login a user.
+only a logged in user can add a playlist.
+extract the user id , playlist title from the request.
+find the user and add a playlist of the given name.
+
