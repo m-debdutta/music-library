@@ -2,6 +2,7 @@
   <head>
     <title>Music library</title>
     <link rel="stylesheet" href="/styles/style.css" />
+    <script src="/scripts/home-page.js"></script>
   </head>
   <body>
     <div id="page">
@@ -13,16 +14,17 @@
       </header>
       <main id="container">
         <div id="playlist-input-box">
-          <form method="post" action="/add-playlist">
+          <form id="playlist-form">
             <input
               type="text"
               name="playlistTitle"
-              id="playlist-name"
+              id="playlist-title"
               placeholder="playlist name"
             />
             <input id="playlist-add-button" type="submit" value="+ add" />
           </form>
         </div>
+        <div id="playlist-section"></div>
       </main>
     </div>
   </body>
