@@ -27,7 +27,7 @@ describe('App', () => {
 
       request(app)
         .post('/add-playlist')
-        .send('playlistTitle=English')
+        .send({ playlistTitle: 'English' })
         .expect(201)
         .end((err) => {
           assert.deepStrictEqual(playlists.toJson(), expected);

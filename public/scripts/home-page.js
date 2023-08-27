@@ -19,7 +19,18 @@ sendAddPlaylistRequest = () => {
   });
 };
 
+const renderAllPlaylist = () => {
+  fetch('/playlists')
+    .then((res) => res.json())
+    .then((playlists) =>
+      playlists.forEach((playlist) => {
+        renderPlaylist(playlist.title);
+      })
+    );
+};
+
 const main = () => {
+  renderAllPlaylist();
   const playlistForm = document.querySelector('#playlist-form');
   playlistForm.onsubmit = (event) => {
     event.preventDefault();

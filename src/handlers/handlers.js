@@ -1,10 +1,18 @@
 const Playlist = require('../models/playlist');
 
 const addNewPlaylist = (req, res) => {
+  const { playlists, playlistStorage } = req.app;
   const { playlistTitle } = req.body;
   const playlist = new Playlist(playlistTitle);
-  res.app.playlists.add(playlist);
-  res.status(201).send();
+  playlists.add(playlist);
+  playlistStorage.store(playlists.toJson(), () => {
+    res.status(201).send();
+  });
 };
 
-module.exports = { addNewPlaylist };
+const servePlaylists = (req, res) => {
+  const { playlists } = req.app;
+  res.json(playlists.toJson());
+};
+
+module.exports = { addNewPlaylist, servePlaylists };

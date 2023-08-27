@@ -1,15 +1,19 @@
 const express = require('express');
 const { logger } = require('./middleware/logger');
-const { addNewPlaylist } = require('./handlers/handlers');
+const { addNewPlaylist, servePlaylists } = require('./handlers/handlers');
+const { restorePlaylists } = require('./restore');
 
-const createApp = (playlists) => {
+const createApp = (playlists, playlistStorage) => {
   const app = express();
+
+  restorePlaylists(playlists, playlistStorage);
   app.playlists = playlists;
+  app.playlistStorage = playlistStorage;
 
   app.use(logger);
   app.use(express.json());
-  app.use(express.urlencoded());
 
+  app.get('/playlists', servePlaylists);
   app.post('/add-playlist', addNewPlaylist);
 
   app.use(express.static('public'));
