@@ -15,4 +15,13 @@ const servePlaylists = (req, res) => {
   res.json(playlists.toJson());
 };
 
-module.exports = { addNewPlaylist, servePlaylists };
+const removePlaylist = (req, res) => {
+  const { playlists, playlistStorage } = req.app;
+  const { playlistTitle } = req.body;
+  playlists.remove(playlistTitle);
+  playlistStorage.store(playlists.toJson(), () => {
+    res.status(204).send();
+  });
+};
+
+module.exports = { addNewPlaylist, servePlaylists, removePlaylist };

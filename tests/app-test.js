@@ -5,6 +5,7 @@ const assert = require('assert');
 const { createApp } = require('../src/app');
 const Playlists = require('../src/models/playlists');
 const { Storage } = require('../src/storage');
+const Playlist = require('../src/models/playlist');
 
 describe('App', () => {
   describe('GET /', () => {
@@ -45,6 +46,31 @@ describe('App', () => {
         .expect(201)
         .end((err) => {
           assert.deepStrictEqual(playlists.toJson(), expected);
+          done(err);
+        });
+    });
+  });
+
+  describe('DELETE /playlists/playlist', () => {
+    it('should delete a playlist', (context, done) => {
+      const path = './data/playlistStorage.json';
+
+      const writeFile = context.mock.fn((path, data, cb) => cb());
+      const readFileSync = context.mock.fn();
+
+      const playlists = new Playlists();
+      const playlistStorage = new Storage({ readFileSync, writeFile }, path);
+      const app = createApp(playlists, playlistStorage);
+
+      const playlist = new Playlist('English');
+      playlists.add(playlist);
+
+      request(app)
+        .delete('/playlists/playlist')
+        .send({ playlistTitle: 'English' })
+        .expect(204)
+        .end((err) => {
+          assert.deepStrictEqual(playlists.toJson(), []);
           done(err);
         });
     });
