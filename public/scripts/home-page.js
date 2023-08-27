@@ -1,7 +1,47 @@
+const sendDeleteRequest = (playlistTitle) => {
+  return fetch('/playlists/playlist', {
+    method: 'DELETE',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ playlistTitle }),
+  }).then((res) => res.status === 204);
+};
+
+const removeElement = (playlistElement) => {
+  playlistElement.remove();
+};
+
+const setUpDeleteButtonEvent = (deleteButton, playlistElement, playlistTitle) => {
+  deleteButton.onclick = () => {
+    sendDeleteRequest(playlistTitle).then((isDeleted) => {
+      if (isDeleted) removeElement(playlistElement);
+    });
+  };
+};
+
+const createDeleteButton = () => {
+  const deleteButton = document.createElement('input');
+  deleteButton.value = 'X';
+  deleteButton.type = 'button';
+
+  return deleteButton;
+};
+
+const createPlaylistElement = (playlistTitle) => {
+  const playlistElement = document.createElement('div');
+  const playlistName = document.createElement('p');
+  const deleteButton = createDeleteButton();
+
+  setUpDeleteButtonEvent(deleteButton, playlistElement, playlistTitle);
+
+  playlistName.innerText = playlistTitle;
+  playlistElement.append(playlistName, deleteButton);
+
+  return playlistElement;
+};
+
 const renderPlaylist = (playlistTitle) => {
-  const playlistElement = document.createElement('p');
+  const playlistElement = createPlaylistElement(playlistTitle);
   const playlistSection = document.querySelector('#playlist-section');
-  playlistElement.innerText = playlistTitle;
   playlistElement.classList.add('playlist');
   playlistSection.appendChild(playlistElement);
 };
