@@ -2,7 +2,7 @@ const fs = require('fs');
 
 const { createApp } = require('./src/app');
 const Playlists = require('./src/models/playlists');
-const { Storage } = require('./src/music-storage');
+const { Storage } = require('./src/storage');
 
 const setUpStorageDir = () => {
   if (!fs.existsSync('./data')) fs.mkdirSync('./data');
