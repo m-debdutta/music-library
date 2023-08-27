@@ -5,7 +5,7 @@
     <script src="/scripts/home-page.js"></script>
   </head>
   <body>
-    <div id="page">
+    <section id="page">
       <header id="page-header">
         <h1 id="page-heading">Music library</h1>
         <div id="authentication">
@@ -13,19 +13,15 @@
         </div>
       </header>
       <main id="container">
-        <div id="playlist-input-box">
-          <form id="playlist-form">
-            <input
-              type="text"
-              name="playlistTitle"
-              id="playlist-title"
-              placeholder="playlist name"
-            />
-            <input id="playlist-add-button" type="submit" value="+ add" />
-          </form>
+        <div id="welcome-message-container">
+          <p id="welcome-message-line-1" class="welcome-message">Welcome to,</p>
+          <p id="welcome-message-line-2" class="welcome-message">Music library</p>
         </div>
-        <div id="playlist-section"></div>
+        <div id="navigation-buttons">
+          <input type="button" value="explore" id="explore-buttton" />
+          <input type="button" value="sign Up/sign In" id="authentication-button" />
+        </div>
       </main>
-    </div>
+    </section>
   </body>
 </html>

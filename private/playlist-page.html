@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <title>Music playlist</title>
+    <link rel="stylesheet" href="/styles/playlist-style.css" />
+    <script src="/scripts/playlist.js"></script>
+  </head>
+  <body>
+    <div id="page">
+      <header id="page-header">
+        <h1 id="page-heading">Music library</h1>
+        <div id="authentication">
+          <a id="login" href="/login">login</a>
+        </div>
+      </header>
+      <main id="container">
+        <div id="playlist-input-box">
+          <form id="playlist-form">
+            <input
+              type="text"
+              name="playlistTitle"
+              id="playlist-title"
+              placeholder="playlist name"
+            />
+            <input id="playlist-add-button" type="submit" value="+ add" />
+          </form>
+        </div>
+        <div id="playlist-section"></div>
+      </main>
+    </div>
+  </body>
+</html>
