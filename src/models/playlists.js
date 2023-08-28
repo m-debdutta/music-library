@@ -13,6 +13,10 @@ class Playlists {
     delete this.#playlists[playlist];
   }
 
+  getPlaylist(playlistTitle) {
+    return this.#playlists[playlistTitle].toJson();
+  }
+
   toJson() {
     return Object.values(this.#playlists).map((playlist) => playlist.toJson());
   }

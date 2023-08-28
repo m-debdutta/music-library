@@ -11,7 +11,7 @@ describe('Playlists', () => {
 
       playlists.add(hindiSongs);
 
-      assert.deepStrictEqual(playlists.toJson(), [{ title: 'Hindi' }]);
+      assert.deepStrictEqual(playlists.toJson(), [{ title: 'Hindi', songs: [] }]);
     });
   });
 });

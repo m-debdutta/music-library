@@ -6,6 +6,6 @@ describe('Playlist', () => {
   it('should create a playlist with the given title.', () => {
     const playlist = new Playlist('English');
 
-    assert.deepStrictEqual(playlist.toJson(), { title: 'English' });
+    assert.deepStrictEqual(playlist.toJson(), { title: 'English', songs: [] });
   });
 });

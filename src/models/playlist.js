@@ -1,8 +1,10 @@
 class Playlist {
   #title;
+  #songs;
 
-  constructor(title) {
+  constructor(title, songs = []) {
     this.#title = title;
+    this.#songs = songs;
   }
 
   get title() {
@@ -12,6 +14,7 @@ class Playlist {
   toJson() {
     return {
       title: this.#title,
+      songs: [...this.#songs],
     };
   }
 }

@@ -1,4 +1,5 @@
 const Playlist = require('../models/playlist');
+const { createPlaylist } = require('../template');
 
 const addNewPlaylist = (req, res) => {
   const { playlists, playlistStorage } = req.app;
@@ -24,4 +25,17 @@ const removePlaylist = (req, res) => {
   });
 };
 
-module.exports = { addNewPlaylist, servePlaylists, removePlaylist };
+const servePlaylist = (req, res) => {
+  const { playlists } = req.app;
+  const { playlistTitle } = req.params;
+  const targetedPlaylist = playlists.getPlaylist(playlistTitle);
+  const playlist = createPlaylist(targetedPlaylist);
+  res.send(playlist);
+};
+
+module.exports = {
+  addNewPlaylist,
+  servePlaylists,
+  removePlaylist,
+  servePlaylist,
+};

@@ -38,7 +38,7 @@ describe('App', () => {
       const playlistStorage = new Storage({ readFileSync, writeFile }, path);
       const app = createApp(playlists, playlistStorage);
 
-      const expected = [{ title: 'English' }];
+      const expected = [{ title: 'English', songs: [] }];
 
       request(app)
         .post('/add-playlist')
@@ -48,6 +48,28 @@ describe('App', () => {
           assert.deepStrictEqual(playlists.toJson(), expected);
           done(err);
         });
+    });
+  });
+
+  describe('GET /playlists/:playlistTitle', () => {
+    it('should get the songs of a playlist', (context, done) => {
+      const path = './data/playlistStorage.json';
+
+      const writeFile = context.mock.fn((path, data, cb) => cb());
+      const readFileSync = context.mock.fn();
+
+      const playlists = new Playlists();
+      const playlistStorage = new Storage({ readFileSync, writeFile }, path);
+      const app = createApp(playlists, playlistStorage);
+
+      const playlist = new Playlist('English');
+      playlists.add(playlist);
+
+      request(app)
+        .get('/playlists/English')
+        .expect(200)
+        .expect('content-type', /text\/html/)
+        .end(done);
     });
   });
 

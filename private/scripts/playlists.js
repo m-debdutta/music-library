@@ -6,15 +6,27 @@ const sendDeleteRequest = (playlistTitle) => {
   }).then((res) => res.status === 204);
 };
 
+const sendShowPlaylistRequest = (playlistTitle) => {
+  window.location.assign('/playlists/' + playlistTitle);
+};
+
+const setUpPlaylistElementEvent = (playlistElement, playlistTitle) => {
+  playlistElement.onclick = () => {
+    sendShowPlaylistRequest(playlistTitle);
+  };
+};
+
 const removeElement = (playlistElement) => {
   playlistElement.remove();
 };
 
 const setUpDeleteButtonEvent = (deleteButton, playlistElement, playlistTitle) => {
-  deleteButton.onclick = () => {
+  deleteButton.onclick = (event) => {
     sendDeleteRequest(playlistTitle).then((isDeleted) => {
       if (isDeleted) removeElement(playlistElement);
     });
+
+    event.stopPropagation();
   };
 };
 
@@ -32,6 +44,7 @@ const createPlaylistElement = (playlistTitle) => {
   const deleteButton = createDeleteButton();
 
   setUpDeleteButtonEvent(deleteButton, playlistElement, playlistTitle);
+  setUpPlaylistElementEvent(playlistElement, playlistTitle);
 
   playlistName.innerText = playlistTitle;
   playlistElement.classList.add('playlist');
