@@ -34,6 +34,7 @@ const createPlaylistElement = (playlistTitle) => {
   setUpDeleteButtonEvent(deleteButton, playlistElement, playlistTitle);
 
   playlistName.innerText = playlistTitle;
+  playlistElement.classList.add('playlist');
   playlistElement.append(playlistName, deleteButton);
 
   return playlistElement;
