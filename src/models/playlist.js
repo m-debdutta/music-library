@@ -7,6 +7,10 @@ class Playlist {
     this.#songs = songs;
   }
 
+  add(song) {
+    this.#songs.push(song);
+  }
+
   get title() {
     return this.#title;
   }

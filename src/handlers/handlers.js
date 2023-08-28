@@ -33,9 +33,20 @@ const servePlaylist = (req, res) => {
   res.send(playlist);
 };
 
+const addSong = (req, res) => {
+  const { playlists, playlistStorage } = req.app;
+  const { songName } = req.body;
+  const { playlistTitle } = req.params;
+  playlists.addSong(songName, playlistTitle);
+  playlistStorage.store(playlists.toJson(), () => {
+    res.status(200).send();
+  });
+};
+
 module.exports = {
+  addSong,
+  servePlaylist,
   addNewPlaylist,
   servePlaylists,
   removePlaylist,
-  servePlaylist,
 };

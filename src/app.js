@@ -4,6 +4,7 @@ const {
   addNewPlaylist,
   servePlaylists,
   removePlaylist,
+  addSong,
   servePlaylist,
 } = require('./handlers/handlers');
 const { restorePlaylists } = require('./restore');
@@ -27,6 +28,7 @@ const createApp = (playlists, playlistStorage) => {
   app.get('/playlists/:playlistTitle', servePlaylist);
   app.post('/add-playlist', addNewPlaylist);
   app.delete('/playlists/playlist', removePlaylist);
+  app.post('/playlists/:playlistTitle/song', addSong);
 
   app.use(express.static('private'));
 

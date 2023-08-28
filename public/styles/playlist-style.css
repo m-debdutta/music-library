@@ -3,8 +3,8 @@
   padding: 0;
   font-size: 16px;
   font-weight: 100;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-    Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 #page-header {
@@ -40,11 +40,31 @@
 
 #playlist-heading {
   padding: 10px;
-  font-size: 3em;
-  font-weight: 400;
   display: flex;
   justify-content: center;
   border-bottom: 1px solid black;
+}
+
+#playlist-heading > h2 {
+  font-size: 3em;
+  font-weight: 400;
+}
+
+#song-add-form {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+#song-input-box {
+  height: 40px;
+  width: 300px;
+  padding: 0 10px;
+}
+
+#song-submit-button {
+  height: 40px;
+  width: 80px;
 }
 
 .song {

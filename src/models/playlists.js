@@ -9,6 +9,10 @@ class Playlists {
     this.#playlists[playlist.title] = playlist;
   }
 
+  addSong(song, playlist) {
+    this.#playlists[playlist].add(song);
+  }
+
   remove(playlist) {
     delete this.#playlists[playlist];
   }

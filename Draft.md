@@ -66,104 +66,30 @@ only a logged in user can add a playlist.
 extract the user id , playlist title from the request.
 find the user and add a playlist of the given name.
 
-```css
-* {
-  margin: 0;
-  padding: 0;
-  font-size: 16px;
-  font-weight: 100;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-    Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
+# Auth
 
-#page-header {
-  margin: 0 auto;
-  padding: 0 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+```js
+const authenticate = (req, res, next) => {
+  if (req.cookies && 'name' in req.cookies) {
+    next();
+  }
+  res.end();
+};
 
-#login {
-  text-decoration: none;
-  font-size: 2em;
-  font-weight: 400;
-}
-
-#page-heading {
-  font-size: 3em;
-  font-weight: 500;
-}
-
-#container {
-  margin: 140px auto;
-  padding: 0 20px;
-  border: 1px solid gray;
-  background-color: #dddddd;
-  height: 45%;
-  width: 35%;
-  border-radius: 10px;
-  display: flex;
-  gap: 40px;
-  flex-flow: column;
-}
-
-.welcome-message {
-  margin: 40px 0;
-  padding: 0 50px;
-  font-size: 3em;
-  font-weight: 600;
-}
-
-#welcome-message-line-2 {
-  font-size: 5em;
-}
-
-#navigation-buttons {
-  height: 15%;
-  display: flex;
-  padding: 0 50px;
-  justify-content: space-between;
-  align-items: center;
-}
-
-#navigation-buttons > input {
-  height: 90%;
-  width: 40%;
-  font-weight: 300;
-  border: none;
-  border: 1px solid grey;
-  border-radius: 10px;
-  font-size: 1.5em;
-  background-color: #aaaaaa;
-}
+module.exports = { authenticate };
 ```
 
-```html
-<html>
-  <head>
-    <title>Music library</title>
-    <link rel="stylesheet" href="/styles/style.css" />
-  </head>
-  <body>
-    <section id="page">
-      <header id="page-header">
-        <h1 id="page-heading">Music library</h1>
-        <div id="authentication">
-          <a id="login" href="/login">login</a>
-        </div>
-      </header>
-      <main id="container">
-        <div id="welcome-message-container">
-          <p id="welcome-message-line-1" class="welcome-message">Welcome to,</p>
-          <p id="welcome-message-line-2" class="welcome-message">Music library</p>
-        </div>
-        <div id="navigation-buttons">
-          <input type="button" value="explore" id="explore-buttton" />
-          <input type="button" value="sign Up/sign In" id="authentication-button" />
-        </div>
-      </main>
-    </section>
-  </body>
-</html>
+# cookie-parser
+
+```js
+const parseCookie = (req, res, next) => {
+  if (req.headers.cookie) {
+    const cookieParams = req.headers.cookie;
+    const cookies = cookieParams.split('; ').map((cookie) => cookie.split('='));
+    req.cookies = Object.fromEntries(cookies);
+  }
+  next();
+};
+
+module.exports = { parseCookie };
 ```

@@ -27,6 +27,94 @@ describe('App', () => {
     });
   });
 
+  describe('GET /playlists', () => {
+    it('should serve empty list, when playlists is empty', (context, done) => {
+      const path = './data/playlistStorage.json';
+
+      const writeFile = context.mock.fn((path, data, cb) => cb());
+      const readFileSync = context.mock.fn();
+
+      const playlists = new Playlists();
+      const playlistStorage = new Storage({ readFileSync, writeFile }, path);
+      const app = createApp(playlists, playlistStorage);
+
+      request(app).get('/playlists').expect(200).expect([]).end(done);
+    });
+
+    it('should serve all playlists when playlists is not empty', (context, done) => {
+      const path = './data/playlistStorage.json';
+
+      const writeFile = context.mock.fn((path, data, cb) => cb());
+      const readFileSync = context.mock.fn();
+
+      const playlists = new Playlists();
+      const playlistStorage = new Storage({ readFileSync, writeFile }, path);
+      const app = createApp(playlists, playlistStorage);
+
+      const hindi = new Playlist('hindi');
+      playlists.add(hindi);
+
+      request(app)
+        .get('/playlists')
+        .expect(200)
+        .expect([{ title: 'hindi', songs: [] }])
+        .end(done);
+    });
+  });
+
+  describe('POST /playlists/:playlistTitle', () => {
+    it('should add song to an empty playlist', (context, done) => {
+      const path = './data/playlistStorage.json';
+
+      const writeFile = context.mock.fn((path, data, cb) => cb());
+      const readFileSync = context.mock.fn();
+
+      const playlists = new Playlists();
+      const playlistStorage = new Storage({ readFileSync, writeFile }, path);
+      const app = createApp(playlists, playlistStorage);
+
+      const expected = [{ title: 'English', songs: ['cheque'] }];
+      const playlist = new Playlist('English');
+      playlists.add(playlist);
+
+      request(app)
+        .post('/playlists/English/song')
+        .type('application/json')
+        .send({ songName: 'cheque' })
+        .expect(200)
+        .end((err) => {
+          assert.deepStrictEqual(playlists.toJson(), expected);
+          done(err);
+        });
+    });
+
+    it('should add song to a playlist containing songs', (context, done) => {
+      const path = './data/playlistStorage.json';
+
+      const writeFile = context.mock.fn((path, data, cb) => cb());
+      const readFileSync = context.mock.fn();
+
+      const expected = [{ title: 'English', songs: ['Killer queen', 'cheque'] }];
+      const playlists = new Playlists();
+      const playlistStorage = new Storage({ readFileSync, writeFile }, path);
+      const app = createApp(playlists, playlistStorage);
+
+      const playlist = new Playlist('English');
+      playlists.add(playlist);
+      playlists.addSong('Killer queen', 'English');
+
+      request(app)
+        .post('/playlists/English/song')
+        .type('application/json')
+        .send({ songName: 'cheque' })
+        .expect(200)
+        .end((err) => {
+          assert.deepStrictEqual(playlists.toJson(), expected);
+          done(err);
+        });
+    });
+  });
+
   describe('POST /add-playlist', () => {
     it('should add a playlist', (context, done) => {
       const path = './data/playlistStorage.json';
