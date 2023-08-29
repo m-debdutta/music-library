@@ -19,9 +19,6 @@ const createPlaylist = ({ title, songs }) => {
     <section id="page">
       <header id="page-header">
         <h1 id="page-heading">Music library</h1>
-        <div id="authentication">
-          <a id="login" href="/login">login</a>
-        </div>
       </header>
       <main id="container">
         <div id="playlist-heading">

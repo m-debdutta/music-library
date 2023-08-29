@@ -38,7 +38,12 @@ describe('App', () => {
       const playlistStorage = new Storage({ readFileSync, writeFile }, path);
       const app = createApp(playlists, playlistStorage);
 
-      request(app).get('/playlists').expect(200).expect([]).end(done);
+      request(app)
+        .get('/playlists')
+        .set('cookie', ['username=debu;password=12345'])
+        .expect(200)
+        .expect([])
+        .end(done);
     });
 
     it('should serve all playlists when playlists is not empty', (context, done) => {
@@ -56,6 +61,7 @@ describe('App', () => {
 
       request(app)
         .get('/playlists')
+        .set('cookie', ['username=debu;password=12345'])
         .expect(200)
         .expect([{ title: 'hindi', songs: [] }])
         .end(done);
@@ -79,6 +85,7 @@ describe('App', () => {
 
       request(app)
         .post('/playlists/English/song')
+        .set('cookie', ['username=debu;password=12345'])
         .type('application/json')
         .send({ songName: 'cheque' })
         .expect(200)
@@ -105,6 +112,7 @@ describe('App', () => {
 
       request(app)
         .post('/playlists/English/song')
+        .set('cookie', ['username=debu;password=12345'])
         .type('application/json')
         .send({ songName: 'cheque' })
         .expect(200)
@@ -130,6 +138,7 @@ describe('App', () => {
 
       request(app)
         .post('/add-playlist')
+        .set('cookie', ['username=debu;password=12345'])
         .send({ playlistTitle: 'English' })
         .expect(201)
         .end((err) => {
@@ -155,6 +164,7 @@ describe('App', () => {
 
       request(app)
         .get('/playlists/English')
+        .set('cookie', ['username=debu;password=12345'])
         .expect(200)
         .expect('content-type', /text\/html/)
         .end(done);
@@ -177,6 +187,7 @@ describe('App', () => {
 
       request(app)
         .delete('/playlists/playlist')
+        .set('cookie', ['username=debu;password=12345'])
         .send({ playlistTitle: 'English' })
         .expect(204)
         .end((err) => {

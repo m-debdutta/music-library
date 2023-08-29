@@ -1,6 +1,6 @@
 const setUpLoginEvent = () => {
-  const login = document.querySelector('#authentication-button');
-  login.onclick = () => {
+  const exploreButton = document.querySelector('#explore-button');
+  exploreButton.onclick = () => {
     window.location.assign('/playlists.html');
   };
 };
