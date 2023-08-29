@@ -3,6 +3,7 @@ const isValidUser = (req) => req.cookies && 'username' in req.cookies;
 const authenticate = (req, res, next) => {
   if (!isValidUser(req)) {
     res.redirect('/pages/login.html');
+    return;
   }
 
   next();
@@ -11,9 +12,10 @@ const authenticate = (req, res, next) => {
 const setCookie = (req, res, next) => {
   if (!isValidUser(req)) {
     res.cookie('username', req.body.username).redirect('/');
+    return;
   }
 
-  next();
+  res.redirect('/');
 };
 
 module.exports = { authenticate, setCookie };

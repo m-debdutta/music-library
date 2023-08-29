@@ -27,6 +27,83 @@ describe('App', () => {
     });
   });
 
+  describe('GET /pages/login.html', () => {
+    it('should serve the login page', (context, done) => {
+      const path = './data/playlistStorage.json';
+
+      const writeFile = context.mock.fn((path, data, cb) => cb());
+      const readFileSync = context.mock.fn();
+
+      const playlists = new Playlists();
+      const playlistStorage = new Storage({ readFileSync, writeFile }, path);
+      const app = createApp(playlists, playlistStorage);
+
+      request(app)
+        .get('/pages/login.html')
+        .expect(200)
+        .expect('content-type', /text\/html/)
+        .end(done);
+    });
+  });
+
+  describe('POST /login', () => {
+    it('should set cookie, when the user is not logged-in', (context, done) => {
+      const path = './data/playlistStorage.json';
+
+      const writeFile = context.mock.fn((path, data, cb) => cb());
+      const readFileSync = context.mock.fn();
+
+      const playlists = new Playlists();
+      const playlistStorage = new Storage({ readFileSync, writeFile }, path);
+      const app = createApp(playlists, playlistStorage);
+
+      request(app)
+        .post('/login')
+        .type('application/json')
+        .send({ username: 'debu', password: 12345 })
+        .expect(302)
+        .expect('set-cookie', /username=debu; Path=\//)
+        .expect('location', '/')
+        .end(done);
+    });
+
+    it('should not set cookie, when the user is already logged-in', (context, done) => {
+      const path = './data/playlistStorage.json';
+
+      const writeFile = context.mock.fn((path, data, cb) => cb());
+      const readFileSync = context.mock.fn();
+
+      const playlists = new Playlists();
+      const playlistStorage = new Storage({ readFileSync, writeFile }, path);
+      const app = createApp(playlists, playlistStorage);
+
+      request(app)
+        .post('/login')
+        .type('application/json')
+        .set('cookie', ['username=debu'])
+        .expect(302)
+        .expect('location', '/')
+        .end(done);
+    });
+
+    it('should redirect to login page if user is not logged-in and ask for a private page', (context, done) => {
+      const path = './data/playlistStorage.json';
+
+      const writeFile = context.mock.fn((path, data, cb) => cb());
+      const readFileSync = context.mock.fn();
+
+      const playlists = new Playlists();
+      const playlistStorage = new Storage({ readFileSync, writeFile }, path);
+      const app = createApp(playlists, playlistStorage);
+
+      request(app)
+        .get('/playlists.html')
+        .expect(302)
+        .expect('location', '/pages/login.html')
+        .end(done);
+    });
+  });
+
   describe('GET /playlists', () => {
     it('should serve empty list, when playlists is empty', (context, done) => {
       const path = './data/playlistStorage.json';
@@ -40,7 +117,7 @@ describe('App', () => {
 
       request(app)
         .get('/playlists')
-        .set('cookie', ['username=debu;password=12345'])
+        .set('cookie', ['username=debu'])
         .expect(200)
         .expect([])
         .end(done);
@@ -61,7 +138,7 @@ describe('App', () => {
 
       request(app)
         .get('/playlists')
-        .set('cookie', ['username=debu;password=12345'])
+        .set('cookie', ['username=debu'])
         .expect(200)
         .expect([{ title: 'hindi', songs: [] }])
         .end(done);
@@ -85,7 +162,7 @@ describe('App', () => {
 
       request(app)
         .post('/playlists/English/song')
-        .set('cookie', ['username=debu;password=12345'])
+        .set('cookie', ['username=debu'])
         .type('application/json')
         .send({ songName: 'cheque' })
         .expect(200)
@@ -112,7 +189,7 @@ describe('App', () => {
 
       request(app)
         .post('/playlists/English/song')
-        .set('cookie', ['username=debu;password=12345'])
+        .set('cookie', ['username=debu'])
         .type('application/json')
         .send({ songName: 'cheque' })
         .expect(200)
@@ -138,7 +215,7 @@ describe('App', () => {
 
       request(app)
         .post('/add-playlist')
-        .set('cookie', ['username=debu;password=12345'])
+        .set('cookie', ['username=debu'])
         .send({ playlistTitle: 'English' })
         .expect(201)
         .end((err) => {
@@ -164,7 +241,7 @@ describe('App', () => {
 
       request(app)
         .get('/playlists/English')
-        .set('cookie', ['username=debu;password=12345'])
+        .set('cookie', ['username=debu'])
         .expect(200)
         .expect('content-type', /text\/html/)
         .end(done);
@@ -187,7 +264,7 @@ describe('App', () => {
 
       request(app)
         .delete('/playlists/playlist')
-        .set('cookie', ['username=debu;password=12345'])
+        .set('cookie', ['username=debu'])
         .send({ playlistTitle: 'English' })
         .expect(204)
         .end((err) => {
