@@ -19,6 +19,9 @@ const createPlaylist = ({ title, songs }) => {
     <section id="page">
       <header id="page-header">
         <h1 id="page-heading">Music library</h1>
+        <div id="authentication">
+          <input type="button" value="logout" id="logout-button"/>
+        </div>
       </header>
       <main id="container">
         <div id="playlist-heading">
@@ -34,7 +37,6 @@ const createPlaylist = ({ title, songs }) => {
           <input type="submit" value="submit" id="song-submit-button" />
         </form>
         <section id="songs">
-          <div class="song"></div>
           ${createSongsElements(songs)}
         </section>
       </main>

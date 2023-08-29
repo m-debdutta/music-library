@@ -15,8 +15,9 @@
   justify-content: space-between;
 }
 
-#login {
-  text-decoration: none;
+#login-button {
+  height: 45px;
+  width: 100px;
   font-size: 2em;
   font-weight: 400;
 }

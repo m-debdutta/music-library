@@ -9,7 +9,7 @@ const authenticate = (req, res, next) => {
   next();
 };
 
-const setCookie = (req, res, next) => {
+const setCookie = (req, res) => {
   if (!isValidUser(req)) {
     res.cookie('username', req.body.username).redirect('/');
     return;

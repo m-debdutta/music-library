@@ -83,9 +83,21 @@ const renderAllPlaylist = () => {
     );
 };
 
+const setUpLogoutButton = () => {
+  const logoutButton = document.querySelector('#logout-button');
+  logoutButton.onclick = () => {
+    fetch('/logout', {
+      method: 'POST',
+    }).then((res) => window.location.assign(res.url));
+  };
+};
+
 const main = () => {
-  renderAllPlaylist();
   const playlistForm = document.querySelector('#playlist-form');
+
+  renderAllPlaylist();
+  setUpLogoutButton();
+
   playlistForm.onsubmit = (event) => {
     event.preventDefault();
     sendAddPlaylistRequest();

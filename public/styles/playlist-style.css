@@ -15,8 +15,9 @@
   justify-content: space-between;
 }
 
-#login {
-  text-decoration: none;
+#logout-button {
+  height: 45px;
+  width: 100px;
   font-size: 2em;
   font-weight: 400;
 }
@@ -34,7 +35,7 @@
   width: 40%;
   border-radius: 10px;
   display: flex;
-  gap: 40px;
+  gap: 30px;
   flex-flow: column;
 }
 
@@ -68,7 +69,9 @@
 }
 
 .song {
+  margin: 10px;
   padding: 5px 40px;
   font-size: 2em;
   font-weight: 300;
+  background-color: #aaaaaa;
 }

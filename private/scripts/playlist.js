@@ -14,7 +14,17 @@ const setUpAddSongRequest = () => {
   };
 };
 
+const setUpLogoutButton = () => {
+  const logoutButton = document.querySelector('#logout-button');
+  logoutButton.onclick = () => {
+    fetch('/logout', {
+      method: 'POST',
+    }).then((res) => window.location.assign(res.url));
+  };
+};
+
 const main = () => {
+  setUpLogoutButton();
   setUpAddSongRequest();
 };
 window.onload = main;

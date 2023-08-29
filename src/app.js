@@ -6,6 +6,7 @@ const {
   removePlaylist,
   addSong,
   servePlaylist,
+  logoutUser,
 } = require('./handlers/handlers');
 const { restorePlaylists } = require('./restore');
 const { parseCookie } = require('./middleware/cookie-parser');
@@ -29,6 +30,7 @@ const createApp = (playlists, playlistStorage) => {
 
   setUpMiddleware(app);
 
+  app.post('/logout', logoutUser);
   app.get('/playlists', servePlaylists);
   app.get('/playlists/:playlistTitle', servePlaylist);
   app.post('/add-playlist', addNewPlaylist);
