@@ -10,7 +10,7 @@ const setUpStorageDir = (playlistDataFilePath) => {
 };
 
 const main = () => {
-  const port = 8000;
+  const port = process.env.PORT || 8000;
   const playlistDataFilePath = './data/playlist-data.json';
   const playlists = new Playlists();
   const playlistStorage = new Storage(fs, playlistDataFilePath);
