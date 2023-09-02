@@ -56,12 +56,14 @@ const createPlaylistElement = (playlistTitle) => {
 const renderPlaylist = (playlistTitle) => {
   const playlistElement = createPlaylistElement(playlistTitle);
   const playlistSection = document.querySelector('#playlist-section');
+
   playlistElement.classList.add('playlist');
   playlistSection.appendChild(playlistElement);
 };
 
 sendAddPlaylistRequest = () => {
-  const playlistTitle = document.querySelector('#playlist-title').value;
+  const playlistInputBox = document.querySelector('#playlist-title');
+  const playlistTitle = playlistInputBox.value;
   fetch('/add-playlist', {
     method: 'POST',
     headers: {
@@ -69,7 +71,10 @@ sendAddPlaylistRequest = () => {
     },
     body: JSON.stringify({ playlistTitle }),
   }).then((res) => {
-    if (res.status === 201) renderPlaylist(playlistTitle);
+    if (res.status === 201) {
+      playlistInputBox.value = '';
+      renderPlaylist(playlistTitle);
+    }
   });
 };
 

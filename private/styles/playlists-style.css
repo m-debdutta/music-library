@@ -7,18 +7,23 @@
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+body {
+  background-color: #444444;
+}
+
 #page-header {
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 10px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: rgb(195, 245, 121);
 }
 
 #logout-button {
-  height: 45px;
-  width: 100px;
-  font-size: 2em;
+  height: 30px;
+  width: 80px;
+  font-size: 1em;
   font-weight: 400;
 }
 
@@ -28,51 +33,62 @@
 }
 
 #container {
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 0 20px;
   border: 1px solid gray;
   background-color: #dddddd;
-  height: 93%;
-  width: 50%;
+  height: 800px;
+  border-radius: 10px;
+  width: 700px;
   display: flex;
   flex-flow: column;
 }
 
 #playlist-form {
   display: flex;
+  padding: 0 3em;
   gap: 1em;
 }
 
 #playlist-input-box {
   height: 10%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   width: 100%;
 }
 
 #playlist-add-button {
   height: 2.5em;
-  width: 80px;
+  width: 40px;
+  border-radius: 4px;
   font-weight: 300;
 }
 
 #playlist-title {
+  border: none;
+  border: 1px solid grey;
   height: 2.5em;
   width: 20em;
   padding: 0 2em;
+  border-radius: 4px;
   font-weight: 200;
 }
 
 .playlist {
   width: 80%;
   margin: 16px auto;
-  padding: 1.5em 2em;
+  padding: 1em 2em;
   background-color: #aaaaaa;
   display: flex;
+  border-radius: 10px;
   align-items: center;
   justify-content: space-between;
   border: 1px solid black;
+}
+
+.playlist:hover {
+  cursor: pointer;
 }
 
 .playlist > p {

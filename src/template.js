@@ -12,7 +12,7 @@ const createPlaylist = ({ title, songs }) => {
   <html>
   <head>
     <title>${title}</title>
-    <link rel="stylesheet" href="../styles/playlist-style.css" />
+    <link rel="stylesheet" href="/styles/playlist-style.css" />
     <script src="/scripts/playlist.js"></script>
   </head>
   <body>
@@ -32,9 +32,9 @@ const createPlaylist = ({ title, songs }) => {
             type="text"
             name="songName"
             id="song-input-box"
-            placeholder="enter a song"
+            placeholder="Enter a song"
           />
-          <input type="submit" value="submit" id="song-submit-button" />
+          <input type="submit" value="+" id="song-submit-button" />
         </form>
         <section id="songs">
           ${createSongsElements(songs)}

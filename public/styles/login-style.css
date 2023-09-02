@@ -7,11 +7,16 @@
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+body {
+  background-color: #444444;
+}
+
 #page-header {
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 10px 40px;
   display: flex;
   align-items: center;
+  background-color: rgb(195, 245, 121);
   justify-content: space-between;
 }
 
@@ -25,8 +30,8 @@
   padding: 0 20px;
   border: 1px solid gray;
   background-color: #dddddd;
-  height: 45%;
-  width: 30%;
+  height: 420px;
+  width: 460px;
   border-radius: 10px;
   display: flex;
   gap: 40px;
@@ -45,7 +50,7 @@
   font-weight: 400;
 }
 
-#login-form{
+#login-form {
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -53,7 +58,8 @@
   gap: 20px;
 }
 
-#username, #password{
+#username,
+#password {
   padding: 10px;
   font-size: 1.4em;
   width: 60%;

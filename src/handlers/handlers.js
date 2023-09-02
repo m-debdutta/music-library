@@ -53,6 +53,11 @@ const logoutUser = (req, res) => {
   res.clearCookie('username').redirect('/');
 };
 
+const sendUserDetails = (req, res) => {
+  const { username } = req.cookies;
+  res.json({ isLoggedIn: true, username });
+};
+
 module.exports = {
   addSong,
   logoutUser,
@@ -60,4 +65,5 @@ module.exports = {
   addNewPlaylist,
   servePlaylists,
   removePlaylist,
+  sendUserDetails,
 };
