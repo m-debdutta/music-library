@@ -2,6 +2,9 @@
   "name": "music-library",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "^20.5.1"
+  },
   "main": "index.js",
   "scripts": {
     "test": "node --test",
