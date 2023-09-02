@@ -97,11 +97,20 @@ const setUpLogoutButton = () => {
   };
 };
 
+const setUpAddButton = () => {
+  const addButton = document.querySelector('#add-button');
+  const playlistInputBox = document.querySelector('#playlist-title');
+  addButton.onclick = () => {
+    playlistInputBox.focus();
+  };
+};
+
 const main = () => {
   const playlistForm = document.querySelector('#playlist-form');
 
   renderAllPlaylist();
   setUpLogoutButton();
+  setUpAddButton();
 
   playlistForm.onsubmit = (event) => {
     event.preventDefault();

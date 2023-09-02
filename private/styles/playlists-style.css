@@ -44,6 +44,21 @@ body {
   flex-flow: column;
 }
 
+#playlists-heading {
+  padding: 10px 0;
+  font-size: 3em;
+  width: 100%;
+  border-bottom: 1px solid #444444;
+  font-weight: 300;
+  align-self: center;
+  text-align: center;
+}
+
+#add-button{
+  height: 40px;
+  width: 40px;
+}
+
 #playlist-form {
   display: flex;
   padding: 0 3em;
