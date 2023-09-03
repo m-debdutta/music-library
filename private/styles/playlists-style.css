@@ -17,7 +17,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgb(195, 245, 121);
+  background-color: rgb(182, 240, 95);
 }
 
 #logout-button {
@@ -25,6 +25,11 @@ body {
   width: 80px;
   font-size: 1em;
   font-weight: 400;
+}
+
+#page-heading:hover {
+  cursor: pointer;
+  user-select: none;
 }
 
 #page-heading {
@@ -48,6 +53,7 @@ body {
   padding: 10px 0;
   font-size: 3em;
   width: 100%;
+  user-select: none;
   border-bottom: 1px solid #444444;
   font-weight: 300;
   align-self: center;

@@ -14,6 +14,13 @@ const setUpAddSongRequest = () => {
   };
 };
 
+const setUpBannerEvent = () => {
+  const banner = document.querySelector('#page-heading');
+  banner.onclick = () => {
+    window.location.assign('/');
+  };
+};
+
 const setUpLogoutButton = () => {
   const logoutButton = document.querySelector('#logout-button');
   logoutButton.onclick = () => {
@@ -24,6 +31,7 @@ const setUpLogoutButton = () => {
 };
 
 const main = () => {
+  setUpBannerEvent();
   setUpLogoutButton();
   setUpAddSongRequest();
 };

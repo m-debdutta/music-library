@@ -33,7 +33,8 @@ const createPlaylist = ({ title, songs }) => {
             name="songName"
             id="song-input-box"
             placeholder="Enter a song"
-          />
+            required
+            />
           <input type="submit" value="+" id="song-submit-button" />
         </form>
         <section id="songs">

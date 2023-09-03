@@ -105,9 +105,17 @@ const setUpAddButton = () => {
   };
 };
 
+const setUpBannerEvent = () => {
+  const banner = document.querySelector('#page-heading');
+  banner.onclick = () => {
+    window.location.assign('/');
+  };
+};
+
 const main = () => {
   const playlistForm = document.querySelector('#playlist-form');
 
+  setUpBannerEvent();
   renderAllPlaylist();
   setUpLogoutButton();
   setUpAddButton();

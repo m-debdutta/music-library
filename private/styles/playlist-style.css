@@ -7,7 +7,7 @@
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-body{
+body {
   background-color: #444444;
 }
 
@@ -16,7 +16,7 @@ body{
   padding: 10px 40px;
   display: flex;
   align-items: center;
-  background-color: rgb(195, 245, 121);
+  background-color: rgb(182, 240, 95);
   justify-content: space-between;
 }
 
@@ -51,9 +51,15 @@ body{
   border-bottom: 1px solid black;
 }
 
+#page-heading:hover {
+  cursor: pointer;
+  user-select: none;
+}
+
 #playlist-heading > h2 {
   font-size: 2em;
   font-weight: 400;
+  user-select: none;
 }
 
 #song-add-form {
@@ -75,6 +81,7 @@ body{
 
 .song {
   margin: 10px;
+  height: 20px;
   padding: 5px 40px;
   font-size: 1em;
   font-weight: 300;

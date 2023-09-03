@@ -28,7 +28,7 @@ const removeLoginOption = () => {
   document.querySelector('#login').remove();
 };
 
-const verifyAndRenderUser = () => {
+const verifyAndRenderUserDetails = () => {
   fetch('/user-details')
     .then((res) => res.json())
     .then(({ isLoggedIn, username }) => {
@@ -51,8 +51,16 @@ const setUpLogoutEvent = () => {
   };
 };
 
+const setUpBannerEvent = () => {
+  const banner = document.querySelector('#page-heading');
+  banner.onclick = () => {
+    window.location.assign('/');
+  };
+};
+
 const main = () => {
-  verifyAndRenderUser();
+  setUpBannerEvent();
+  verifyAndRenderUserDetails();
   setUpExploreEvent();
 };
 
