@@ -1,9 +1,9 @@
 const renderLogoutButton = () => {
   const authenticationSection = document.querySelector('#authentication');
-  const logoutButton = document.createElement('input');
-  logoutButton.type = 'button';
-  logoutButton.value = 'logout';
-  logoutButton.id = 'logout-button';
+  const logoutButton = document.createElement('span');
+  logoutButton.innerText = 'logout';
+  logoutButton.id = 'logout';
+  logoutButton.classList.add('clickable');
 
   authenticationSection.appendChild(logoutButton);
 };
@@ -24,8 +24,8 @@ const setUpExploreEvent = () => {
   };
 };
 
-const removeLoginButton = () => {
-  document.querySelector('#login-button').remove();
+const removeLoginOption = () => {
+  document.querySelector('#login').remove();
 };
 
 const verifyAndRenderUser = () => {
@@ -33,7 +33,7 @@ const verifyAndRenderUser = () => {
     .then((res) => res.json())
     .then(({ isLoggedIn, username }) => {
       if (isLoggedIn) {
-        removeLoginButton();
+        removeLoginOption();
         renderUserDetails(username);
         renderLogoutButton();
         setUpLogoutEvent();
@@ -43,7 +43,7 @@ const verifyAndRenderUser = () => {
 };
 
 const setUpLogoutEvent = () => {
-  const logoutButton = document.querySelector('#logout-button');
+  const logoutButton = document.querySelector('#logout');
   logoutButton.onclick = () => {
     fetch('/logout', {
       method: 'POST',
@@ -51,17 +51,9 @@ const setUpLogoutEvent = () => {
   };
 };
 
-const setUpLoginEvent = () => {
-  const loginButton = document.querySelector('#login-button');
-  loginButton.onclick = () => {
-    window.location.assign('/playlists.html');
-  };
-};
-
 const main = () => {
   verifyAndRenderUser();
   setUpExploreEvent();
-  setUpLoginEvent();
 };
 
 window.onload = main;
